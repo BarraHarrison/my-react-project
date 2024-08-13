@@ -20,13 +20,28 @@
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
 
-.clicked {
+.lists {
+  padding: 10px;
   font-weight: 450;
 }
 
-.lists {
-  font-weight: 450;
+.clicked {
+  font-weight: bold;
+  color: red;
 }
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  margin: 5px 0;
+  padding: 10px;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+
 
 @keyframes logo-spin {
   from {

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
+import "./../App.css"; // Ensure you have the relevant CSS for animations
 
 function State() {
-    // Array of names
     let names = [
         "David", "John", "Mary", "Sarah", "Michael", "Jessica", "James", "Patricia", "Robert", "Linda",
         "William", "Barbara", "Richard", "Elizabeth", "Joseph", "Jennifer", "Thomas", "Maria", "Charles", "Susan",
@@ -15,46 +15,81 @@ function State() {
         "Alexander", "Marie", "Jack", "Janet", "Dennis", "Catherine", "Jerry", "Frances", "Tyler", "Ann"
     ];
 
-    // State for managing the selected name index
+
     const [selectedIndex, setSelectedIndex] = useState(-1);
+    const [searchTerm, setSearchTerm] = useState("");
+    const [backgroundColor, setBackgroundColor] = useState("#fff");
 
-    // State for managing the counter
-    const [count, setCount] = useState(0);
-
-    // Functions to handle counter increment and decrement
-    const increment = () => {
-        setCount(count + 1);
+    // Function to handle name selection
+    const handleSelectName = (index) => {
+        setSelectedIndex(index);
+        setBackgroundColor(getRandomColor());
+        // Add confetti effect or any other fun animation
+        triggerConfetti();
     };
 
-    const decrement = () => {
-        setCount(count - 1);
+    // Function to get a random color
+    const getRandomColor = () => {
+        const letters = '0123456789ABCDEF';
+        let color = '#';
+        for (let i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+    };
+
+    // Function to filter names based on search term
+    const filteredNames = names.filter(name =>
+        name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
+    // Placeholder for confetti animation trigger
+    const triggerConfetti = () => {
+        console.log("Confetti time! 🎉");
+        // Implement your confetti animation logic here
     };
 
     return (
-        <>
-            <h1>State</h1>
+        <div style={{ backgroundColor: backgroundColor, padding: "20px", transition: "background-color 0.5s ease" }}>
+            <h1>Fun and Interactive Name List</h1>
 
-            {/* Counter Section */}
-            <div>
-                <h2>Counter Example</h2>
-                <p>Current Count: {count}</p>
-                <button onClick={increment}>Increment</button>
-                <button onClick={decrement}>Decrement</button>
-            </div>
+            {/* Search Bar */}
+            <input
+                type="text"
+                placeholder="Search names..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                style={{ marginBottom: "20px", padding: "10px", width: "80%" }}
+            />
 
-            {/* Name List Section */}
+            {/* Name List */}
             <ul>
-                {names.map((name, index) => (
+                {filteredNames.map((name, index) => (
                     <li
-                        onClick={() => setSelectedIndex(index)}
                         key={index}
-                        className={selectedIndex === index ? "clicked" : "lists"}
+                        onClick={() => handleSelectName(index)}
+                        className={`lists ${selectedIndex === index ? 'clicked' : ''}`}
+                        style={{
+                            cursor: 'pointer',
+                            transition: 'transform 0.3s ease, color 0.3s ease',
+                            color: selectedIndex === index ? 'red' : 'black'
+                        }}
+                        onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.1)'}
+                        onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1.0)'}
                     >
                         {name}
                     </li>
                 ))}
             </ul>
-        </>
+
+            {/* Random Name Picker */}
+            <button
+                onClick={() => handleSelectName(Math.floor(Math.random() * names.length))}
+                style={{ marginTop: "20px", padding: "10px", cursor: "pointer" }}
+            >
+                Pick a Random Name
+            </button>
+        </div>
     );
 }
 
