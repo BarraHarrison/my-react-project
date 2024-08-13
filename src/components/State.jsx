@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import "./../App.css"; // Ensure this import is correct
+import "./../App.css";
+import confetti from "canvas-confetti"; // Importing the confetti package
 
 function State() {
     let names = [
@@ -23,7 +24,7 @@ function State() {
     const handleSelectName = (index) => {
         setSelectedIndex(index);
         setBackgroundColor(getRandomColor());
-        triggerConfetti();
+        triggerConfetti(); // Trigger confetti on name click
     };
 
     // Function to get a random color
@@ -41,10 +42,13 @@ function State() {
         name.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
-    // Placeholder for confetti animation trigger
+    // Confetti animation trigger
     const triggerConfetti = () => {
-        console.log("Confetti time! 🎉");
-        // Implement your confetti animation logic here
+        confetti({
+            particleCount: 100, // Number of confetti pieces
+            spread: 70,         // Spread of confetti
+            origin: { y: 0.6 }  // Where the confetti originates from
+        });
     };
 
     return (
