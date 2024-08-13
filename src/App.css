@@ -20,9 +20,24 @@
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
 
+.name-grid {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  /* 10 columns */
+  gap: 10px;
+  /* space between the items */
+  list-style-type: none;
+  padding: 0;
+}
+
 .lists {
   padding: 10px;
   font-weight: 450;
+  text-align: center;
+  /* Center-align the text in each grid item */
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  transition: transform 0.3s ease, color 0.3s ease;
 }
 
 .clicked {
@@ -40,7 +55,17 @@ li {
   padding: 10px;
   border-radius: 5px;
   transition: all 0.3s ease;
+  background-color: #f0f0f0;
+  /* Light background for better visibility */
 }
+
+li:hover {
+  background-color: #e0e0e0;
+  /* Slightly darker background on hover */
+  transform: scale(1.05);
+}
+
+
 
 
 @keyframes logo-spin {

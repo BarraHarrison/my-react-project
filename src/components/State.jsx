@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./../App.css"; // Ensure you have the relevant CSS for animations
+import "./../App.css"; // Ensure this import is correct
 
 function State() {
     let names = [
@@ -15,7 +15,6 @@ function State() {
         "Alexander", "Marie", "Jack", "Janet", "Dennis", "Catherine", "Jerry", "Frances", "Tyler", "Ann"
     ];
 
-
     const [selectedIndex, setSelectedIndex] = useState(-1);
     const [searchTerm, setSearchTerm] = useState("");
     const [backgroundColor, setBackgroundColor] = useState("#fff");
@@ -24,7 +23,6 @@ function State() {
     const handleSelectName = (index) => {
         setSelectedIndex(index);
         setBackgroundColor(getRandomColor());
-        // Add confetti effect or any other fun animation
         triggerConfetti();
     };
 
@@ -63,7 +61,7 @@ function State() {
             />
 
             {/* Name List */}
-            <ul>
+            <ul className="name-grid">
                 {filteredNames.map((name, index) => (
                     <li
                         key={index}
